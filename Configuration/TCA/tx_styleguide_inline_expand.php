@@ -103,12 +103,29 @@ return [
             ],
         ],
 
+        'inline_2' => [
+            'exclude' => 1,
+            'label' => 'inline_2 levelLinksPosition=bottom max_items=1',
+            'config' => [
+                'type' => 'inline',
+                'allowed' => 'tx_styleguide_inline_expand_inline_1_child',
+                'foreign_table' => 'tx_styleguide_inline_expand_inline_1_child',
+                'foreign_sortby' => 'sorting',
+                'foreign_field' => 'parentid_2',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'appearance' => [
+                    'levelLinksPosition' => 'bottom',
+                ]
+            ]
+        ],
+
     ],
 
     'types' => [
         '0' => [
             'showitem' => '
-                inline_1,
+                inline_1,inline_2
             ',
         ],
     ],
