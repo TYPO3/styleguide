@@ -77,6 +77,11 @@ return [
                 'type' => 'passthrough',
             ]
         ],
+        'parentid_2' => [
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
         'parenttable' => [
             'config' => [
                 'type' => 'passthrough',
