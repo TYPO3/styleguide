@@ -2,8 +2,8 @@
 
 return [
     'ctrl' => [
-        'title' => 'Form engine - inline mn symmetric select',
-        'label' => 'input_1',
+        'title' => 'Form engine - inline mn symmetric group mm',
+        'label' => 'uid',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -11,7 +11,6 @@ return [
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'translationSource' => 'l10n_source',
-        'sortby' => 'sorting',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
@@ -24,10 +23,18 @@ return [
     'columns' => [
 
         'sys_language_uid' => [
-            'exclude' => true,
+            'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
-                'type' => 'language'
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'sys_language',
+                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'items' => [
+                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
+                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0]
+                ],
+                'default' => 0,
             ]
         ],
         'l10n_parent' => [
@@ -39,8 +46,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_styleguide_inline_mnsymmetric',
-                'foreign_table_where' => 'AND {#tx_styleguide_inline_mnsymmetric}.{#pid}=###CURRENT_PID### AND {#tx_styleguide_inline_mnsymmetric}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_styleguide_inline_mnsymmetricgroup_mm',
+                'foreign_table_where' => 'AND {#tx_styleguide_inline_mnsymmetricgroup_mm}.{#pid}=###CURRENT_PID### AND {#tx_styleguide_inline_mnsymmetricgroup_mm}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0
             ]
         ],
@@ -57,8 +64,8 @@ return [
                         0
                     ]
                 ],
-                'foreign_table' => 'tx_styleguide_inline_mnsymmetric',
-                'foreign_table_where' => 'AND {#tx_styleguide_inline_mnsymmetric}.{#pid}=###CURRENT_PID### AND {#tx_styleguide_inline_mnsymmetric}.{#uid}!=###THIS_UID###',
+                'foreign_table' => 'tx_styleguide_inline_mnsymmetricgroup_mm',
+                'foreign_table_where' => 'AND {#tx_styleguide_inline_mnsymmetricgroup_mm}.{#pid}=###CURRENT_PID### AND {#tx_styleguide_inline_mnsymmetricgroup_mm}.{#uid}!=###THIS_UID###',
                 'default' => 0
             ]
         ],
@@ -76,45 +83,45 @@ return [
             ]
         ],
 
-        'input_1' => [
-            'exclude' => 1,
-            'l10n_mode' => 'prefixLangTitle',
-            'label' => 'input_1',
+        'hotelid' => [
+            'label' => 'hotelid',
             'config' => [
-                'type' => 'input',
-                'size' => '30',
-                'eval' => 'required',
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_styleguide_inline_mnsymmetricgroup',
+                'minitems' => 1,
+                'maxitems' => 1,
+                'size' => 1,
             ]
         ],
-        'branches' => [
-            'exclude' => 1,
-            'label' => 'branches',
+        'branchid' => [
+            'label' => 'branchid',
             'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_styleguide_inline_mnsymmetric_mm',
-                'foreign_field' => 'hotelid',
-                'foreign_sortby' => 'hotelsort',
-                'foreign_label' => 'branchid',
-                'symmetric_field' => 'branchid',
-                'symmetric_sortby' => 'branchsort',
-                'symmetric_label' => 'hotelid',
-                'maxitems' => 10,
-                'appearance' => [
-                    'showSynchronizationLink' => 1,
-                    'showAllLocalizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                ],
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_styleguide_inline_mnsymmetricgroup',
+                'minitems' => 1,
+                'maxitems' => 1,
+                'size' => 1,
             ]
         ],
-
+        'hotelsort' => [
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
+        'branchsort' => [
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
     ],
 
     'types' => [
         '0' => [
             'showitem' => '
-                --div--;General, input_1, branches,
-                --div--;Visibility, sys_language_uid, l18n_parent,l18n_diffsource, hidden
-            '
+                --div--;General, title, hotelid, branchid,
+                --div--;Visibility, sys_language_uid, l18n_parent, l10n_diffsource, hidden, hotelsort, branchsort'
         ]
     ],
 
