@@ -88,6 +88,7 @@ return [
                 'foreign_selector' => 'select_child',
                 'foreign_unique' => 'select_child',
                 'maxitems' => 9999,
+                'autoSizeMax' => 10,
                 'appearance' => [
                     'newRecordLinkAddTitle' => 1,
                     'useCombination' => true,

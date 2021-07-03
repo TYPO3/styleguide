@@ -159,13 +159,14 @@ return [
         ],
         'group_db_11' => [
             'exclude' => 1,
-            'label' => 'group_db_11 hideSuggest=true allowed=tx_styleguide_staticdata, multiple',
+            'label' => 'group_db_11 hideSuggest=true allowed=tx_styleguide_staticdata, multiple, autoSizeMax=10',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'hideSuggest' => true,
                 'allowed' => 'tx_styleguide_staticdata',
                 'multiple' => true,
+                'autoSizeMax' => 10
             ],
         ],
         'group_db_4' => [
