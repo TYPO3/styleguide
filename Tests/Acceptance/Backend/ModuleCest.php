@@ -65,7 +65,8 @@ class ModuleCest
         $I->click('TCA / Records / Frontend');
         $I->waitForText('TCA test records');
         $I->click('Create styleguide page tree with data');
-        $I->waitForText('A page tree with styleguide TCA test records was created.', 300);
+        $I->wait('#alert-container typo3-notification-message', 300);
+        $I->see('A page tree with styleguide TCA test records was created.', '#alert-container typo3-notification-message');
     }
 
     /**

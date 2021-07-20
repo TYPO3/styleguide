@@ -19,6 +19,7 @@ namespace TYPO3\CMS\Styleguide\Controller;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -165,22 +166,24 @@ class BackendController extends ActionController
         $finder = GeneralUtility::makeInstance(RecordFinder::class);
         if (count($finder->findUidsOfStyleguideEntryPages())) {
             // Tell something was done here
-            $this->addFlashMessage(
-                LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionFailedBody', 'styleguide'),
-                LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionFailedTitle', 'styleguide'),
-                AbstractMessage::ERROR
-            );
+            $json = [
+                'title' => LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionFailedTitle', 'styleguide'),
+                'body' => LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionFailedBody', 'styleguide'),
+                'status' => AbstractMessage::ERROR
+            ];
         } else {
             $generator = GeneralUtility::makeInstance(Generator::class);
             $generator->create();
+
             // Tell something was done here
-            $this->addFlashMessage(
-                LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionOkBody', 'styleguide'),
-                LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionOkTitle', 'styleguide')
-            );
+            $json = [
+                'title' => LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionOkTitle', 'styleguide'),
+                'body' => LocalizationUtility::translate($this->languageFilePrefix . 'tcaCreateActionOkBody', 'styleguide'),
+                'status' => AbstractMessage::OK
+            ];
         }
         // And redirect to display action
-        return new ForwardResponse('tca');
+        return new JsonResponse($json);
     }
 
     /**
@@ -188,15 +191,17 @@ class BackendController extends ActionController
      */
     public function tcaDeleteAction(): ResponseInterface
     {
+        /** @var Generator $generator */
         $generator = GeneralUtility::makeInstance(Generator::class);
         $generator->delete();
         // Tell something was done here
-        $this->addFlashMessage(
-            LocalizationUtility::translate($this->languageFilePrefix . 'tcaDeleteActionOkBody', 'styleguide'),
-            LocalizationUtility::translate($this->languageFilePrefix . 'tcaDeleteActionOkTitle', 'styleguide')
-        );
-        // And redirect to display action
-        return new ForwardResponse('tca');
+        $json = [
+            'title' => LocalizationUtility::translate($this->languageFilePrefix . 'tcaDeleteActionOkTitle', 'styleguide'),
+            'body' => LocalizationUtility::translate($this->languageFilePrefix . 'tcaDeleteActionOkBody', 'styleguide'),
+            'status' => AbstractMessage::OK
+        ];
+
+        return new JsonResponse($json);
     }
 
     /**
@@ -368,29 +373,27 @@ class BackendController extends ActionController
 
     public function frontendCreateAction(): ResponseInterface
     {
-
         /** @var RecordFinder $recordFinder */
         $recordFinder = GeneralUtility::makeInstance(RecordFinder::class);
         if (count($recordFinder->findUidsOfFrontendPages())) {
-            // Tell something was done here
-            $this->addFlashMessage(
-                LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionFailedBody', 'styleguide'),
-                LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionFailedTitle', 'styleguide'),
-                AbstractMessage::ERROR
-            );
+            $json = [
+              'title' => LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionFailedTitle', 'styleguide'),
+              'body' => LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionFailedBody', 'styleguide'),
+              'status' => AbstractMessage::ERROR
+            ];
         } else {
             /** @var GeneratorFrontend $frontend */
             $frontend = GeneralUtility::makeInstance(GeneratorFrontend::class);
             $frontend->create();
-            // Tell something was done here
-            $this->addFlashMessage(
-                LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionOkBody', 'styleguide'),
-                LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionOkTitle', 'styleguide')
-            );
+
+            $json = [
+                'title' => LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionOkTitle', 'styleguide'),
+                'body' => LocalizationUtility::translate($this->languageFilePrefix . 'frontendCreateActionOkBody', 'styleguide'),
+                'status' => AbstractMessage::OK
+            ];
         }
 
-        // And redirect to display action
-        return new ForwardResponse('tca');
+        return new JsonResponse($json);
     }
 
     public function frontendDeleteAction(): ResponseInterface
@@ -399,12 +402,12 @@ class BackendController extends ActionController
         $frontend = GeneralUtility::makeInstance(GeneratorFrontend::class);
         $frontend->delete();
 
-        $this->addFlashMessage(
-            LocalizationUtility::translate($this->languageFilePrefix . 'frontendDeleteActionOkBody', 'styleguide'),
-            LocalizationUtility::translate($this->languageFilePrefix . 'frontendDeleteActionOkTitle', 'styleguide')
-        );
+        $json = [
+            'title' => LocalizationUtility::translate($this->languageFilePrefix . 'frontendDeleteActionOkTitle', 'styleguide'),
+            'body' => LocalizationUtility::translate($this->languageFilePrefix . 'frontendDeleteActionOkBody', 'styleguide'),
+            'status' => AbstractMessage::OK
+        ];
 
-        // And redirect to display action
-        return new ForwardResponse('tca');
+        return new JsonResponse($json);
     }
 }
