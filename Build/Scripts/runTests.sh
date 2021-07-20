@@ -20,7 +20,8 @@ setUpDockerComposeDotEnv() {
     # Your local home directory for composer and npm caching
     echo "HOST_HOME=${HOME}" >> .env
     # Your local user
-    echo "ROOT_DIR"=${ROOT_DIR} >> .env
+    echo "ROOT_DIR=${ROOT_DIR}" >> .env
+    # echo "ROOT_DIR=/Volumes/Development/typo3-dev/typo3conf/ext/styleguide" >> .env
     echo "HOST_USER=${USER}" >> .env
     echo "TEST_FILE=${TEST_FILE}" >> .env
     echo "PHP_XDEBUG_ON=${PHP_XDEBUG_ON}" >> .env

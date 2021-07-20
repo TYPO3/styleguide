@@ -62,10 +62,11 @@ class ModuleCest
         $I->click('Styleguide', self::$topBarModuleSelector);
         $I->switchToContentFrame();
         $I->see('TYPO3 CMS Backend Styleguide', 'h1');
-        $I->click('TCA / Records');
+        $I->click('TCA / Records / Frontend');
         $I->waitForText('TCA test records');
         $I->click('Create styleguide page tree with data');
-        $I->waitForText('A page tree with styleguide TCA test records was created.', 300);
+        $I->wait('#alert-container typo3-notification-message', 300);
+        $I->see('A page tree with styleguide TCA test records was created.', '#alert-container typo3-notification-message');
     }
 
     /**
@@ -79,7 +80,7 @@ class ModuleCest
         $I->click('Styleguide', self::$topBarModuleSelector);
         $I->switchToContentFrame();
         $I->see('TYPO3 CMS Backend Styleguide', 'h1');
-        $I->click('TCA / Records');
+        $I->click('TCA / Records / Frontend');
         $I->waitForText('TCA test records');
         $I->click('Delete styleguide page tree and all styleguide data records');
         $I->waitForText('The styleguide page tree and all styleguide records were deleted.', 300);

@@ -1,0 +1,45 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+    <f:be.pageRenderer includeRequireJsModules="{0: 'TYPO3/CMS/Styleguide/ProcessingIndicator'}" />
+
+	<h1><f:translate key="tca" /></h1>
+
+	<h2>TCA test records</h2>
+
+	<p class="lead">
+		This extension comes with a huge set of TCA records to show and test different combinations
+		of TCA possibilities. This module can be used to create a page tree with default records and
+		demo data.
+	</p>
+
+	<p>
+        <button data-href="{f:uri.action(action: 'tcaCreate')}" class="btn btn-primary{f:if(condition: '{demoExists} = true', then: ' disabled')} t3js-generator-action">
+            <i class="fa fa-plus fa-fw"></i>
+            <f:translate key="tcaCreateButton" />
+        </button>
+
+        <button data-href="{f:uri.action(action: 'tcaDelete')}" class="btn btn-danger{f:if(condition: '{demoExists} != true', then: ' disabled')}  t3js-generator-action">
+            <i class="fa fa-trash fa-fw"></i>
+            <f:translate key="tcaDeleteButton" />
+        </button>
+	</p>
+
+    <h2>Create a frontend page tree including FE elements</h2>
+
+    <p class="lead">
+        This creates a frontend with a page for each content element a site configuration and files
+    </p>
+
+    <p>
+        <button data-href="{f:uri.action(action: 'frontendCreate')}" class="btn btn-primary{f:if(condition: '{demoFrontendExists} = true', then: ' disabled')}  t3js-generator-action">
+            <i class="fa fa-plus fa-fw"></i>
+            <f:translate key="frontendCreateButton" />
+        </button>
+
+        <button data-href="{f:uri.action(action: 'frontendDelete')}" class="btn btn-danger{f:if(condition: '{demoFrontendExists} != true', then: ' disabled')}  t3js-generator-action">
+            <i class="fa fa-trash fa-fw"></i>
+            <f:translate key="frontendDeleteButton" />
+        </button>
+    </p>
+</f:section>
