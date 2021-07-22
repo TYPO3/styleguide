@@ -8,6 +8,9 @@
 @import 'EXT:styleguide/Configuration/TypoScript/extensions/form.typoscript'
 @import 'EXT:styleguide/Configuration/TypoScript/extensions/felogin.typoscript'
 
+// Configure admin panel
+config.admPanel = 1
+
 // Define template paths for fluid_styled_content
 lib.contentElement {
   templateName = Default
