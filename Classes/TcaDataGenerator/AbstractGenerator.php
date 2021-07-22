@@ -206,7 +206,7 @@ abstract class AbstractGenerator
         }
     }
 
-    protected function write(array $data = [], array $commands = []): void
+    protected function executeDataHandler(array $data = [], array $commands = []): void
     {
         if (!empty($data) || !empty($commands)) {
             $dataHandler = GeneralUtility::makeInstance(DataHandler::class);

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-namespace TYPO3\CMS\Styleguide\Command;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,6 +14,8 @@ namespace TYPO3\CMS\Styleguide\Command;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace TYPO3\CMS\Styleguide\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -99,7 +100,7 @@ class GeneratorCommand extends Command
         /** @var RecordFinder $finder */
         $finder = GeneralUtility::makeInstance(RecordFinder::class);
         if (count($finder->findUidsOfStyleguideEntryPages())) {
-            $output->writeln('<warning>TCA page tree already exists!</warning>');
+            $output->writeln('<comment>TCA page tree already exists!</comment>');
         } else {
             $generator = GeneralUtility::makeInstance(Generator::class);
             $generator->create();
@@ -125,7 +126,7 @@ class GeneratorCommand extends Command
         $recordFinder = GeneralUtility::makeInstance(RecordFinder::class);
 
         if (count($recordFinder->findUidsOfFrontendPages())) {
-            $output->writeln('<info>Frontend page tree already exists!</info>');
+            $output->writeln('<comment>Frontend page tree already exists!</comment>');
         } else {
             /** @var GeneratorFrontend $frontend */
             $frontend = GeneralUtility::makeInstance(GeneratorFrontend::class);

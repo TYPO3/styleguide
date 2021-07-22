@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-namespace TYPO3\CMS\Styleguide\TcaDataGenerator;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,6 +14,8 @@ namespace TYPO3\CMS\Styleguide\TcaDataGenerator;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace TYPO3\CMS\Styleguide\TcaDataGenerator;
 
 use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
@@ -118,7 +119,7 @@ class Generator extends AbstractGenerator
         }
 
         // Populate page tree via DataHandler
-        $this->write($data);
+        $this->executeDataHandler($data);
 
         // Create a site configuration on root page
         $topPageUid = $recordFinder->findUidsOfStyleguideEntryPages()[0];
@@ -193,7 +194,7 @@ class Generator extends AbstractGenerator
         }
 
         // Process commands to delete records
-        $this->write([], $commands);
+        $this->executeDataHandler([], $commands);
 
         // Delete demo images in fileadmin again
         $this->deleteFalFolder('styleguide');
