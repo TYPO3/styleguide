@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace TYPO3\CMS\Styleguide\Tests\Acceptance\Command;
 
 use TYPO3\CMS\Styleguide\Tests\Acceptance\Support\BackendTester;
-use TYPO3\TestingFramework\Core\Acceptance\Helper\Topbar;
 
 /**
  * Tests the styleguide backend module can be loaded

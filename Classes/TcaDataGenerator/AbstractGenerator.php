@@ -229,7 +229,8 @@ abstract class AbstractGenerator
     /**
      * Create demo languages if they do not already exist
      */
-    protected function createSysLanguages() {
+    protected function createSysLanguages()
+    {
         $recordFinder = GeneralUtility::makeInstance(RecordFinder::class);
         $demoLanguagesUids = $recordFinder->findUidsOfDemoLanguages();
         if (empty($demoLanguagesUids)) {
