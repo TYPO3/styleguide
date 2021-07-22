@@ -133,10 +133,11 @@ class GeneratorFrontend extends AbstractGenerator
             }
         }
 
+        $this->createSysLanguages();
         $this->executeDataHandler($data);
 
         // Create site configuration for frontend
-        if ($GLOBALS['TYPO3_REQUEST']) {
+        if (isset($GLOBALS['TYPO3_REQUEST'])) {
             $domain = $GLOBALS['TYPO3_REQUEST']->getUri()->getScheme() . '://' . $GLOBALS['TYPO3_REQUEST']->getUri()->getHost() . '/';
         } else {
             // On cli there is not TYPO3_REUQEST object, therefore use only slash
